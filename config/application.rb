@@ -21,6 +21,21 @@ module OnlineShoping
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
+    # Only loads a smaller set of middleware suitable for API only apps.
+    config.api_only = true
+
+    # Load all locale files recursively
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+
+    # Load RakeAttack middleware for api throttling
+    # config.middleware.use Rack::Attack
+
+    # Accepted and supportd locales
+    config.i18n.available_locales = [:en, :ar]
+
+    # The default timezone
+    config.time_zone = 'UTC'
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

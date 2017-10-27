@@ -1,0 +1,8 @@
+Description:
+    Generate acts_as_api model presenters
+
+Example:
+    rails generate presenter user
+
+    This will create:
+        app/presenters/user_presenter.rb

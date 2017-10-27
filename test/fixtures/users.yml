@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id            :integer          not null, primary key
+#  full_name     :string           not null
+#  username      :string
+#  email         :string           not null
+#  status        :integer          default("active"), not null
+#  role          :integer          default("customer"), not null
+#  date_of_birth :date
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 # This model initially had no columns defined. If you add columns to the

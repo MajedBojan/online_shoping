@@ -1,0 +1,69 @@
+en:
+  errors:
+    # 10XX : Main App Errors
+    '1000': 'App Server Error, please contact the admin' # Global Error
+    '1001': 'Missing Headers'
+    '1002': 'Missing Parameters'
+    '1003': 'Invalid offset or limit'
+    '1004': 'Invalid Locale'
+    '1005': 'Invalid Timezone'
+    '1006': 'You exceeded the limit of requests per minute, Please try again after sometime.'
+
+    # 11XX : Http Errors
+    '1101': 'Unauthorized'
+    '1102': 'Not authorized to access'
+    '1103': 'Unprocessable Entity'
+    '1104': 'Authentication Failed'
+    '1105': 'Not Found'
+
+    # 12XX : Auth Erorrs
+    '1201': 'Your session is expired, please login again' # Token expired
+    '1202': 'Your sessions is invalid' # JWT verification error
+    '1203': 'Your sessions is invalid' # Error encountered while decoding JWT token
+    '1204': 'Your sessions token is invalid' # Invalid token
+    '1205': 'You are Unauthorized, Please login' # You are Unauthorized, Please login
+    '1206': 'Authentication Error, User Not found' # Authentication Error, User Not found
+
+    # 13XX Session Errors
+    '1301': 'Invalid Credentials'
+    '1302': 'Invalid Login Type'
+    '1303': 'Invalid Social Type'
+    '1304': 'Login Error'
+    '1305': 'You Account is disabled by the admin.'
+    '1306': 'Invalid mobile number.'
+    '1307': 'Wrong confirmation code! Try again.'
+    '1308': 'Invalid email or password'
+    '1309': 'Your account already exist in the app, please try to login.'
+    '1310': 'Your request is invalid or your request time is over, please try again.'
+    '1311': 'Your are not authorized to access the admin panel'
+    '1312': 'An issue in the Active Directory Service, please contat the Administrator'
+
+    '1401': 'No user found with this email'
+    '1402': 'Invalid recover password token'
+    '1403': 'Recover password token is expired'
+    '1404': 'Invalid old Password'
+    '1405': 'The phone number already changed'
+
+    # 14XX Password Errors
+    e_1401: 'No user found with this email'
+    e_1402: 'Invalid recover password token'
+    e_1403: 'Recover password token is expired'
+    e_1404: 'Invalid old Password'
+
+  activerecord:
+    errors:
+      messages:
+        invalid_json: "is not a valid transulation format"
+        en_required: "English is Required"
+        translation_taken: "The record already taken"
+        invalid_username: "can contain characters, digits, dash '-' and underscore '_' only"
+        invalid_mobile_number: 'Should be in valid format and contain country code'
+        required_keys_ar: 'Invalid required_keys arabic'
+        required_keys_en: 'Invalid required_keys english'
+        already_taken: 'Already taken, please choose another'
+        already_gave_feedback: 'Cannot give his feedback twice'
+        before: 'Should be before start date'
+        invalid_datetime: 'Invalid date'
+        on_or_after:  "should not be on previous date"
+        required_if_rating_low: 'is required if rating less than 3'
+        required_only_rating_low: 'only required if rating less than 3'

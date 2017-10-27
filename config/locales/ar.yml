@@ -1,0 +1,22 @@
+ar:
+  hello:                  "أهلا"
+  data_found:             'تم العثور على البيانات'
+  no_data_found:          'لاتوجد بيانات'
+  not_found:              'غير موجود'
+  x_not_found:            '%{name} غير موجود!'
+  update_successfully:    'تم التحديث بنجاح'
+  x_update_successfully:  '%{اسم} تم تحديث بنجاح'
+  created_successfully:   'تم الإنشاء بنجاح'
+  x_created_successfully: 'تم إنشاء%{name} بنجاح'
+  deleted_successfully:   'تم الحذف بنجاح'
+  x_deleted_successfully: 'تم حذف%{name} بنجاح'
+  support:
+    array:
+      last_word_connector: ", و "
+      two_words_connector: " و "
+  approved: 'وافق'
+  rejected: 'رفض'
+
+  sessions:
+    account_created: 'تم انشاء الحساب بنجاح'
+    login_successfully: 'تم تسجيل دخول المستخدم بنجاح'
