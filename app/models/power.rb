@@ -99,9 +99,33 @@ class Power
     false
   end
 
-  power :destroyable_sub_employee do
+  power :destroyable_sub_category do
     return SubCategory if admin?
     false
   end
 
+  ##------------------------------ productsController -----------------------------------##
+
+  power :product_index do |sub_category_id|
+    SubCategory.find(sub_category_id).products#.includes(:user)
+  end
+
+  power :product_show do |sub_category_id|
+    SubCategory.find(sub_category_id).products
+  end
+
+  power :creatable_product do |sub_category_id|
+    return true if admin?
+    false
+  end
+
+  power :updatable_product do |sub_category_id|
+    return SubCategory.find(sub_category_id).products if admin?
+    false
+  end
+
+  power :destroyable_product do |sub_category_id|
+    return SubCategory.find(sub_category_id).products if admin?
+    false
+  end
 end

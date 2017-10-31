@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :sessions, only: [:create]
     resources :users
     resources :categories
-    resources :sub_categories
+    resources :sub_categories do
+      resources :products
+    end
   end
 end

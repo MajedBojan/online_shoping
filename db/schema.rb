@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030105303) do
+ActiveRecord::Schema.define(version: 20171031065911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,27 @@ ActiveRecord::Schema.define(version: 20171030105303) do
     t.datetime "updated_at", null: false
     t.index ["category_constant"], name: "index_categories_on_category_constant"
     t.index ["name"], name: "index_categories_on_name"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.bigint "sub_category_id", null: false
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.string "description"
+    t.string "band_colour"
+    t.string "band_material"
+    t.string "brand"
+    t.string "dial_colour"
+    t.string "display_type"
+    t.decimal "price", default: "0.0", null: false
+    t.decimal "discount_price", default: "0.0", null: false
+    t.integer "status", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_products_on_name"
+    t.index ["price"], name: "index_products_on_price"
+    t.index ["sub_category_id"], name: "index_products_on_sub_category_id"
+    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "sub_categories", force: :cascade do |t|
@@ -48,5 +69,7 @@ ActiveRecord::Schema.define(version: 20171030105303) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "products", "sub_categories", on_delete: :cascade
+  add_foreign_key "products", "users", on_delete: :cascade
   add_foreign_key "sub_categories", "categories", on_delete: :cascade
 end

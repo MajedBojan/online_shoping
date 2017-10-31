@@ -13,8 +13,11 @@
 class SubCategory < ApplicationRecord
   ## -------------------- Requirements -------------------- ##
   include SubCategorPresenter
+
   ## ---------------------- Associations ------------------ ##
   belongs_to :category
+  has_many :products, dependent: :destroy
+
   ## --------------------- Callbacks ---------------------- ##
   ## -------------------- Validations --------------------- ##
   ## ----------------------- Enums ------------------------ ##

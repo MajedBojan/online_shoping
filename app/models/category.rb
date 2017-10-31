@@ -17,6 +17,7 @@ class Category < ApplicationRecord
 
   ## ---------------------- Associations ------------------ ##
   has_many :sub_categories, dependent: :destroy
+
   ## --------------------- Callbacks ---------------------- ##
   ## -------------------- Validations --------------------- ##
   ## ------------------- Class Methods -------------------- ##

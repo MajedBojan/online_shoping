@@ -5,7 +5,7 @@ class V1::SubCategoriesController < V1::BaseController
     [:show]    => :sub_category_show,
     [:create]  => :creatable_sub_category,
     [:update]  => :updatable_sub_category,
-    [:destroy] => :destroyable_sub_employee
+    [:destroy] => :destroyable_sub_category
   }, as: :sub_categories_scope
 
   private

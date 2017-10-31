@@ -15,10 +15,14 @@
 #
 
 class User < ApplicationRecord
+
   ## -------------------- Requirements -------------------- ##
   has_secure_password(validations: false)
   include UserPresenter
+
   ## ---------------------- Associations ------------------ ##
+  has_many :products
+
   ## --------------------- Callbacks ---------------------- ##
   ## -------------------- Validations --------------------- ##
 
