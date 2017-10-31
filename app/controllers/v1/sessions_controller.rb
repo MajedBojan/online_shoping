@@ -3,9 +3,8 @@ class V1::SessionsController < V1::BaseController
   skip_before_action :authenticate_request!
 
   def create
-    # debugger
     return if missing_params!([:email, :password])
-    @user = User.login(params[:username], params[:password])
+    @user = User.login(params[:email], params[:password])
     return render_bad_request(error: 1301) unless @user.present?
     return render_bad_request(error: @user)  if @user.errors.any?
     render_login

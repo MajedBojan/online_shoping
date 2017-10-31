@@ -17,6 +17,7 @@ gem 'acts_as_api'            # serialize models for the json apis
 gem 'json_translate'         # Allow you to translate your model attribute
 gem "paperclip", "~> 5.0.0"  # Upload image files
 gem 'bcrypt', '~> 3.1.7'     # Use ActiveModel has_secure_password
+gem 'kaminari'               # handle ActiveRecord Pagination
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'

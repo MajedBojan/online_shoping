@@ -20,7 +20,41 @@ class V1::BaseController < V1::ApiController
     render_data(resource_node.singularize.to_sym => get_resource.as_api_response(show_template, template_injector))
   end
 
+  ## ------------------------------------------------------------ ##
 
+  # POST : /v1/{resource}/:id
+  def create
+    set_resource(resource_class.new(params_processed))
+    if get_resource.save
+      message = action_message[:create] || I18n.t(:x_created_successfully, name: resource_name.titleize)
+      render_created({ resource_node.singularize.to_sym => get_resource.as_api_response(show_template, template_injector) }, message: message)
+    else
+      render_unprocessable_entity(error: get_resource)
+    end
+  end
+
+  ## ------------------------------------------------------------ ##
+
+  # PUT : /v1/{resource}/:id
+  def update
+    if get_resource.update(params_processed)
+      message = action_message[:update] || I18n.t(:x_update_successfully, name: resource_name.titleize)
+      render_data({ resource_node.singularize.to_sym => get_resource.as_api_response(show_template, template_injector) }, message: message)
+    else
+      render_unprocessable_entity(error: get_resource)
+    end
+  end
+
+  ## ------------------------------------------------------------ ##
+
+  # DELETE : /v1/{resource}/:id
+  def destroy
+    if get_resource.destroy
+      render_success(action_message[:destroy] || I18n.t(:x_deleted_successfully, name: resource_name.titleize))
+    else
+      render_unprocessable_entity(error: get_resource)
+    end
+  end
   ## ------------------------------------------------------------ ##
 
   private
@@ -53,6 +87,12 @@ class V1::BaseController < V1::ApiController
   # @return [String]
   def resource_name
     @resource_name ||= controller_name.singularize
+  end
+
+  # The resource class based on the controller
+  # @return [Class]
+  def resource_class
+    @resource_class ||= resource_name.classify.constantize
   end
 
   # Get the collection and apply the search, pagination and order
@@ -115,21 +155,6 @@ class V1::BaseController < V1::ApiController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : default
   end
 
-  # The pagination payload to index response
-  # @return [Hash]
-  def pagination(object)
-    {
-      pagination: {
-        current_page:  object.current_page,
-        next_page:     object.next_page,
-        previous_page: object.prev_page,
-        total_pages:   object.total_pages,
-        per_page:      object.limit_value,
-        total_entries: object.total_count
-      }
-    }
-  end
-
   # the default show template
   def show_template
     @access == 'admin' ? :v1_admin_show : :v1_show
@@ -151,6 +176,21 @@ class V1::BaseController < V1::ApiController
   # @return [Hash]
   def template_injector
     {}
+  end
+
+  # incase params needed to be processed or apply some
+  # logic before passing to the model
+  def params_processed
+    resource_params
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  # If a single resource is loaded for #create or #update,
+  # then the controller for the resource must implement
+  # the method "#{resource_name}_params" to limit permitted
+  # parameters for the individual model.
+  def resource_params
+    @resource_params ||= send("#{resource_name}_params")
   end
 
   # the default message of the index (with data and without)

@@ -10,14 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027061829) do
+ActiveRecord::Schema.define(version: 20171030105303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "status", default: 1, null: false
+    t.string "category_constant"
+    t.integer "category_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_constant"], name: "index_categories_on_category_constant"
+    t.index ["name"], name: "index_categories_on_name"
+  end
+
+  create_table "sub_categories", force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.string "name"
+    t.integer "status", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_sub_categories_on_category_id"
+    t.index ["name"], name: "index_sub_categories_on_name"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "full_name", null: false
-    t.string "username"
+    t.string "username", null: false
     t.string "password_digest", null: false
     t.string "email", null: false
     t.integer "status", default: 1, null: false
@@ -27,4 +48,5 @@ ActiveRecord::Schema.define(version: 20171027061829) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "sub_categories", "categories", on_delete: :cascade
 end

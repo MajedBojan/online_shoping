@@ -2,20 +2,27 @@
 #
 # Table name: users
 #
-#  id            :integer          not null, primary key
-#  full_name     :string           not null
-#  username      :string
-#  email         :string           not null
-#  status        :integer          default("active"), not null
-#  role          :integer          default("customer"), not null
-#  date_of_birth :date
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id              :integer          not null, primary key
+#  full_name       :string           not null
+#  username        :string           not null
+#  password_digest :string           not null
+#  email           :string           not null
+#  status          :integer          default("active"), not null
+#  role            :integer          default("customer"), not null
+#  date_of_birth   :date
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 
 class User < ApplicationRecord
+  ## -------------------- Requirements -------------------- ##
   has_secure_password(validations: false)
   include UserPresenter
+  ## ---------------------- Associations ------------------ ##
+  ## --------------------- Callbacks ---------------------- ##
+  ## -------------------- Validations --------------------- ##
+
+  ## ----------------------- Enums ------------------------ ##
 
   # User Roles
   enum role: {
@@ -29,8 +36,8 @@ class User < ApplicationRecord
     inactive: 2
   }
 
-  ## ----------------------- Enums ------------------------ ##
 
+  ## ------------------- Class Methods -------------------- ##
   # ِlogin method
   def self.login(email, password)
     active.find_by(email: email)&.authenticate(password) || false
@@ -47,5 +54,4 @@ class User < ApplicationRecord
       role:       self.role,
     }
   end
-
 end

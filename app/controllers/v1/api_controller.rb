@@ -22,7 +22,7 @@ class V1::ApiController < ApplicationController
   current_power do
     Power.new(current_user, @access)
   end
-  
+
   # Set request locale
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale

@@ -1,4 +1,4 @@
-module UserPresenter
+module SubCategorPresenter
   extend ActiveSupport::Concern
 
   included do
@@ -8,10 +8,7 @@ module UserPresenter
 
     api_accessible :base do |t|
       t.add :id
-      t.add :full_name
-      t.add :username
-      t.add :email
-      t.add :role
+      t.add :name
     end
 
     ## ----------------------- Users ------------------------ ##
@@ -24,9 +21,8 @@ module UserPresenter
 
     api_accessible :v1_admin_index, extend: :base
 
-    api_accessible :v1_admin_show, extend: :v1_admin_index
-
-    ## ----------------------- Login ------------------------ ##
-    api_accessible :v1_profile, extend: :base
+    api_accessible :v1_admin_show, extend: :v1_admin_index do |t|
+      t.add :status
+    end
   end
 end
